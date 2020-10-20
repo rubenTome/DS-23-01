@@ -2,7 +2,7 @@ package e1;
 
 import java.util.Random;
 public class StringUtilities {
-    public static boolean isValidMix(String a, String b, String c) {//charat
+    public static boolean isValidMix(String a, String b, String c) {
         if (a.length() + b.length() != c.length()) return false;
         else {
             int j = 0;
@@ -15,7 +15,7 @@ public class StringUtilities {
         }
     }
 
-    //coverage no es útil porque el nivel de cobertura varía según que número creemos
+
     public static String generateRandomValidMix(String a, String b) {
 
         char[] arrayA = a.toCharArray();
