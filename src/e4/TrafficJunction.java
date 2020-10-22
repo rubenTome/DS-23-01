@@ -4,13 +4,10 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class TrafficJunction {
-    Set<TrafficLight> Semaforos = EnumSet.allOf(TrafficLight.class);
+    Set<TrafficLight> Semaforos;
 
     public TrafficJunction(){
-        TrafficLight t1 = TrafficLight.NORTH;
-        TrafficLight t2 = TrafficLight.SOUTH;
-        TrafficLight t3 = TrafficLight.EAST;
-        TrafficLight t4 = TrafficLight.WEST;
+        Semaforos = EnumSet.of(TrafficLight.NORTH,TrafficLight.SOUTH,TrafficLight.EAST,TrafficLight.WEST);
     }
 
     public void timesGoesBy(){
@@ -21,6 +18,7 @@ public class TrafficJunction {
                 trafficLight.setCounter(contador + 1);
             }
         }
+        ChangeColours.Change(Semaforos);
     }
 
     public void amberJunction(boolean active){
@@ -52,23 +50,19 @@ public class TrafficJunction {
                 case "RED" :
                 case "AMBER ON" : {
                     output.append(trafficLight.getName());
-                    output.append(":");
+                    output.append(": ");
                     output.append(trafficLight.getState());
                 }
                 break;
-                case "GREEN" :{
+                case "GREEN" :
+                case "AMBER OFF" : {
                     output.append(trafficLight.getName());
-                    output.append(":");
+                    output.append(": ");
                     output.append(trafficLight.getState());
+                    output.append(" ");
                     output.append(trafficLight.getCounter());
                 }
                 break;
-                case "AMBER OFF" :{
-                    output.append(trafficLight.getName());
-                    output.append(":");
-                    output.append(trafficLight.getState());
-                    output.append(trafficLight.getCounter());
-                }
                 default: {
                     throw new IllegalArgumentException();
                 }
