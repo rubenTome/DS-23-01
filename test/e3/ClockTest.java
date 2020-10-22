@@ -1,122 +1,148 @@
 package e3;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ClockTest {
 
-    @Test
-    void constructorasClock() {
-        try {//casos suponemos correctos
-            new Clock("12:25:36");
-            new Clock("12:01:12 AM");
-            new Clock("12:01:12 PM");
-            new Clock(12, 25, 37, Clock.Period.AM);
-            new Clock(12, 25, 0);
-        } catch (IllegalArgumentException exception) {
-            assert false;
-        }
+    @BeforeEach
+    void setUp() {
 
-        try {//caso suponemos falso
-            new Clock("12:25:36AM");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("12:25:36 ww");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("12/25/36 AM");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("AB:CD:DE");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("90:56:30");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("12:61:30");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("12:59:60");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock("05:14:25AAM");
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock(61, 50, 3);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }try {//caso suponemos falso
-            new Clock(12, 62, 15);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock(9, 8, 60);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock(61, 50, 3, Clock.Period.PM);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }try {//caso suponemos falso
-            new Clock(12, 62, 15, Clock.Period.AM);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
-        try {//caso suponemos falso
-            new Clock(9, 8, 60, Clock.Period.NULL);
-        } catch (IllegalArgumentException exception) {
-            assert true;
-        }
     }
 
     @Test
-    void gettersClock() {
-        Clock clock = new Clock("03:25:45 PM");
-        Clock clock2 = new Clock("22:15:04");
-        assertEquals(Clock.Period.PM.getVal(), clock.getPeriod().getVal());
-        assertEquals(clock.getHours24(), 15);
-        assertEquals(clock.getHours12(), 3);
-        assertEquals(clock.getMinutes(), 25);
-        assertEquals(clock.getSeconds(), 45);
-        assertEquals(clock2.getHours24(), 22);
-        assertEquals(clock2.getHours12(), 10);
+    void stringConstructors() {
+        Clock c = new Clock("13:18:05");
+        assertEquals( 1, c.getHours12());
+        assertEquals(13, c.getHours24());
+        assertEquals(18, c.getMinutes());
+        assertEquals( 5, c.getSeconds());
+        assertEquals(Clock.Period.PM, c.getPeriod());
+
+        c = new Clock("05:30:00 PM");
+        assertEquals( 5, c.getHours12());
+        assertEquals(17, c.getHours24());
+        assertEquals(30, c.getMinutes());
+        assertEquals( 0, c.getSeconds());
+        assertEquals(Clock.Period.PM, c.getPeriod());
+
+        c = new Clock("12:00:00 AM");
+        assertEquals(12, c.getHours12());
+        assertEquals( 0, c.getHours24());
+        assertEquals( 0, c.getMinutes());
+        assertEquals( 0, c.getSeconds());
+        assertEquals(Clock.Period.AM, c.getPeriod());
+
+        assertThrows(IllegalArgumentException.class, () -> new Clock("Hola Mundo"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("AB:CD:EF"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("28:15:40"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("12:00:00 FM"));
+
+        //añadidos----------------------------------------------------------------------
+        c = new Clock("10:10:10");
+        assertEquals(c.getPeriod(), Clock.Period.AM);
+        assertThrows(IllegalArgumentException.class, () -> new Clock("12/25:45"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("12:25/45"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("12:61:12"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("12:12:64"));
+        assertThrows(IllegalArgumentException.class, () -> new Clock("10:05:10_AM"));
+
     }
 
     @Test
-    void printClock() {
-        Clock clock = new Clock("03:25:45 PM");
-        Clock clock2 = new Clock("10:10:10 AM");
-        assertEquals(clock.printHour24(), "15:25:45");
-        assertEquals(clock2.printHour24(), "10:10:10");
-        assertEquals(clock.printHour12(), "03:25:45 PM");
+    void integerConstructors() {
+        Clock c = new Clock(17, 25, 32);
+        assertEquals( 5, c.getHours12());
+        assertEquals(17, c.getHours24());
+        assertEquals(25, c.getMinutes());
+        assertEquals(32, c.getSeconds());
+        assertEquals(Clock.Period.PM, c.getPeriod());
+
+        c = new Clock(11, 30, 45, Clock.Period.PM);
+        assertEquals(11, c.getHours12());
+        assertEquals(23, c.getHours24());
+        assertEquals(30, c.getMinutes());
+        assertEquals(45, c.getSeconds());
+        assertEquals(Clock.Period.PM, c.getPeriod());
+
+        c = new Clock(12, 0, 0, Clock.Period.AM);
+        assertEquals(12, c.getHours12());
+        assertEquals( 0, c.getHours24());
+        assertEquals( 0, c.getMinutes());
+        assertEquals( 0, c.getSeconds());
+        assertEquals(Clock.Period.AM, c.getPeriod());
+
+        //añadidos-----------------------------------
+        c = new Clock(10, 10, 10);
+        assertEquals(c.getPeriod(), Clock.Period.AM);
+        assertThrows(IllegalArgumentException.class, () -> new Clock(24, 10, 10));
+        assertThrows(IllegalArgumentException.class, () -> new Clock(22, 60, 10));
+        assertThrows(IllegalArgumentException.class, () -> new Clock(20, 10, 61));
+        assertThrows(IllegalArgumentException.class, () -> new Clock(24, 10, 10, Clock.Period.AM));
+        assertThrows(IllegalArgumentException.class, () -> new Clock(22, 60, 10, Clock.Period.AM));
+        assertThrows(IllegalArgumentException.class, () -> new Clock(20, 10, 61, Clock.Period.AM));
+
+
     }
 
     @Test
-    void compClock() {
-        Clock clock = new Clock("11:25:45 PM");
-        Clock clock2 = new Clock("23:25:45");
-        assertEquals(clock.hashCode(), clock2.hashCode());
-        assertEquals(clock2, clock);
-        assertEquals(clock, clock2);
-        assertEquals(clock, clock);
+    void printHour24() {
+        Clock c = new Clock(18, 45, 32);
+        assertEquals("18:45:32", c.printHour24());
+
+        c = new Clock(10, 30, 45, Clock.Period.PM);
+        assertEquals("22:30:45", c.printHour24());
+
+        c = new Clock(12, 0, 0, Clock.Period.AM);
+        assertEquals("00:00:00", c.printHour24());
+
+        //añadidos----------------------------------------------------
+        c = new Clock(10, 10, 10, Clock.Period.AM);
+        assertEquals(c.printHour24(), "10:10:10");
+    }
+
+    @Test
+    void printHour12() {
+        Clock c = new Clock(18, 45, 32);
+        assertEquals("06:45:32 PM", c.printHour12());
+
+        c = new Clock(10, 30, 45, Clock.Period.PM);
+        assertEquals("10:30:45 PM", c.printHour12());
+
+        c = new Clock(12, 0, 0, Clock.Period.AM);
+        assertEquals("12:00:00 AM", c.printHour12());
+    }
+
+    @Test
+    void testEquals() {
+        Clock c1 = new Clock(17, 30, 30);
+        Clock c2 = new Clock( 5, 30, 30, Clock.Period.PM);
+        Clock c3 = new Clock( 5 ,30, 30, Clock.Period.AM);
+
+        assertEquals(c2, c1);
+        assertEquals(c1, c2);
+
+        assertNotEquals(c3, c1);
+        assertNotEquals(c3, c2);
+
+        assertNotEquals(c1, null);
+        assertNotEquals(new Object(), c1);
+
+        //añadidos------------------------
+        String a = "a";
+        assertEquals(c1, c1);
+        assertNotEquals(c1, a);
+    }
+
+    @Test
+    void testHashCode() {
+        Clock c1 = new Clock(17, 30, 30);
+        Clock c2 = new Clock( 5, 30, 30, Clock.Period.PM);
+        Clock c3 = new Clock( 5 ,30, 30, Clock.Period.AM);
+
+        assertEquals(c2.hashCode(), c1.hashCode());
+        assertTrue(c1.hashCode() != c3.hashCode());
     }
 }

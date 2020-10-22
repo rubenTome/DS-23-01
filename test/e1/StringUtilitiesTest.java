@@ -1,6 +1,5 @@
 package e1;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,16 +7,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class StringUtilitiesTest {
 
     @Test
-    void pruebaIsValidMix() {
-        Assertions.assertFalse(StringUtilities.isValidMix("aaa", "bbb", "ccccccccc"));
-        assertFalse(StringUtilities.isValidMix("abc", "def", "abxded"));
-        assertTrue(StringUtilities.isValidMix("abc", "def", "abcdef"));
+    void isValidMix() {
+        assertTrue(StringUtilities.isValidMix("Bye", "World", "ByeWorld"));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", "WorldBye"));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", "BWyoerld"));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", "ByWorled"));
+
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "eyBdlroW"));
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "ByeWorlds"));
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "ByeWordl"));
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "HelloWorld"));
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "ByWorl"));
+        assertFalse(StringUtilities.isValidMix("Bye", "World", "BByyeeWWoorrlldd"));
     }
 
     @Test
-    void pruebaGenerateRandomValidMix() {
-        assertTrue(StringUtilities.isValidMix("abc", "def", StringUtilities.generateRandomValidMix("abc", "def")));
-        assertFalse(StringUtilities.isValidMix("asd", "fgh", StringUtilities.generateRandomValidMix("abc", "def")));
+    void generateRandomValidMix() {
+        assertTrue(StringUtilities.isValidMix("Bye", "World", StringUtilities.generateRandomValidMix("Bye", "World")));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", StringUtilities.generateRandomValidMix("Bye", "World")));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", StringUtilities.generateRandomValidMix("Bye", "World")));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", StringUtilities.generateRandomValidMix("Bye", "World")));
+        assertTrue(StringUtilities.isValidMix("Bye", "World", StringUtilities.generateRandomValidMix("Bye", "World")));
 
+        // Given a more or less long String, the result should be normally not equal
+        assertNotEquals(StringUtilities.generateRandomValidMix("Bye", "World"), StringUtilities.generateRandomValidMix("Bye", "World"));
     }
 }

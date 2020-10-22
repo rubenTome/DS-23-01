@@ -49,27 +49,28 @@ public class TrafficJunction {
         for(TrafficLight trafficLight : Semaforos){
             output.append("[");
             switch(trafficLight.getState()){
-                case "RED" :{
+                case "RED" :
+                case "AMBER ON" : {
                     output.append(trafficLight.getName());
                     output.append(":");
                     output.append(trafficLight.getState());
                 }
+                break;
                 case "GREEN" :{
                     output.append(trafficLight.getName());
                     output.append(":");
                     output.append(trafficLight.getState());
                     output.append(trafficLight.getCounter());
                 }
-                case "AMBER ON" :{
-                    output.append(trafficLight.getName());
-                    output.append(":");
-                    output.append(trafficLight.getState());
-                }
+                break;
                 case "AMBER OFF" :{
                     output.append(trafficLight.getName());
                     output.append(":");
                     output.append(trafficLight.getState());
                     output.append(trafficLight.getCounter());
+                }
+                default: {
+                    throw new IllegalArgumentException();
                 }
             }
             output.append("]");

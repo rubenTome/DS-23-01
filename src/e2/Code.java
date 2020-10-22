@@ -7,13 +7,13 @@ public class Code {
         char ch = '1';
         boolean valid = true;
         if (keypad != null) {
-            for (int i = 0; i < keypad.length; i++) {
-                if (keypad[i] != null) {
-                    for (int j = 0; j < keypad[i].length; j++) {
-                        if(keypad[i][j] == ch) ch++;
-                        else{
+            for (char[] chars : keypad) {
+                if (chars != null) {
+                    for (char aChar : chars) {
+                        if (aChar == ch) ch++;
+                        else {
                             ch = '0';
-                            if(keypad[i][j] == ch) ch = 'A';
+                            if (aChar == ch) ch = 'A';
                             else valid = false;
                         }
                     }
@@ -23,11 +23,11 @@ public class Code {
             if(!valid){
                 ch = '1';
                 for(int j = 0; j < keypad[0].length; j++){
-                    for(int i = 0; i < keypad.length; i++){
-                        if(keypad[i][j] == ch) ch++;
-                        else{
+                    for (char[] chars : keypad) {
+                        if (chars[j] == ch) ch++;
+                        else {
                             ch = '0';
-                            if(keypad[i][j] == ch) ch = 'A';
+                            if (chars[j] == ch) ch = 'A';
                             else return false;
                         }
                     }
@@ -41,11 +41,11 @@ public class Code {
     public static boolean areMovementsValid(String[] movements) {
         boolean valid = true;
         if (movements != null) {
-            for (int i = 0; i < movements.length; i++) {
-                if (movements[i] != null) {
-                    for (int j = 0; j < movements[i].length(); j++) {
-                        if (movements[i].charAt(j) != 'U' && movements[i].charAt(j) != 'D' && movements[i].charAt(j) != 'R'
-                                && movements[i].charAt(j) != 'L') {
+            for (String movement : movements) {
+                if (movement != null) {
+                    for (int j = 0; j < movement.length(); j++) {
+                        if (movement.charAt(j) != 'U' && movement.charAt(j) != 'D' && movement.charAt(j) != 'R'
+                                && movement.charAt(j) != 'L') {
                             valid = false;
                         }
                     }
@@ -63,18 +63,18 @@ public class Code {
         int c = 0;
 
         if (isKeypadValid(keypad) && areMovementsValid(movements)) {
-            for (int i = 0; i < movements.length; i++) {
-                for (int j = 0; j < movements[i].length(); j++) {
-                    if (movements[i].charAt(j) == 'U' && (f > 0)) {
+            for (String movement : movements) {
+                for (int j = 0; j < movement.length(); j++) {
+                    if (movement.charAt(j) == 'U' && (f > 0)) {
                         f--;
                     }
-                    if (movements[i].charAt(j) == 'D' && (f < keypad.length - 1)) {
+                    if (movement.charAt(j) == 'D' && (f < keypad.length - 1)) {
                         f++;
                     }
-                    if (movements[i].charAt(j) == 'L' && (c > 0)) {
+                    if (movement.charAt(j) == 'L' && (c > 0)) {
                         c--;
                     }
-                    if (movements[i].charAt(j) == 'R' && (c < keypad[0].length - 1)) {
+                    if (movement.charAt(j) == 'R' && (c < keypad[0].length - 1)) {
                         c++;
                     }
                 }
