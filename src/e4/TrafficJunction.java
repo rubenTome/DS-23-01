@@ -63,9 +63,6 @@ public class TrafficJunction {
                     output.append(trafficLight.getCounter());
                 }
                 break;
-                default: {
-                    throw new IllegalArgumentException();
-                }
             }
             output.append("]");
         }

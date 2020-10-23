@@ -40,6 +40,28 @@ class TrafficJunctionTest {
         tj.timesGoesBy();
         assertEquals("[NORTH: RED][SOUTH: AMBER OFF 0][EAST: RED][WEST: RED]", tj.toString()); // A0
 
+        /*Casos añadidos*/
+        for(int i = 1; i <= 5; i++) tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: AMBER OFF 5][EAST: RED][WEST: RED]", tj.toString());
+        tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: GREEN 0][WEST: RED]", tj.toString());
+        for(int i = 1; i <= 15;i++) tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: GREEN 15][WEST: RED]", tj.toString());
+        tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: AMBER OFF 0][WEST: RED]", tj.toString());
+        for(int i = 1; i <= 5; i++) tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: AMBER OFF 5][WEST: RED]", tj.toString());
+        tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: RED][WEST: GREEN 0]", tj.toString());
+        for(int i = 1; i <= 15; i++) tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: RED][WEST: GREEN 15]", tj.toString());
+        tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: RED][WEST: AMBER OFF 0]", tj.toString());
+        for(int i = 1; i <= 5; i++) tj.timesGoesBy();
+        assertEquals("[NORTH: RED][SOUTH: RED][EAST: RED][WEST: AMBER OFF 5]", tj.toString());
+        tj.timesGoesBy();
+        assertEquals("[NORTH: GREEN 0][SOUTH: RED][EAST: RED][WEST: RED]", tj.toString());
+
         tj.amberJunction(true);
         assertEquals("[NORTH: AMBER ON][SOUTH: AMBER ON][EAST: AMBER ON][WEST: AMBER ON]", tj.toString()); // amber blinking (no time)
         for (int i = 1; i <= 10; i++) tj.timesGoesBy();
