@@ -30,4 +30,12 @@ public class Bestias extends Character{
     public int getShield() {
         return this.shield;
     }
+
+    public int decidirAtaque(int dado){
+        return dado;
+    }
+
+    public void calcularDammage(int ataque){
+        if(ataque > this.getShield()) this.setLife(ataque - this.getShield());
+    }
 }

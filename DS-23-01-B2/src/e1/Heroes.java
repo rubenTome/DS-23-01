@@ -1,6 +1,8 @@
 package e1;
 
-public class Heroes extends Character{
+public class Heroes extends Character implements Dados{
+
+    protected int ataque;
 
     @Override
     public void setLife(int life) {
@@ -30,5 +32,13 @@ public class Heroes extends Character{
     @Override
     public int getShield() {
         return this.shield;
+    }
+
+    public int decidirAtaque(int dado1, int dado2){
+        return Math.max(dado1, dado2);
+    }
+
+    public void calcularDammage(int ataque){
+        if(ataque > this.getShield()) this.setLife(ataque - this.getShield());
     }
 }

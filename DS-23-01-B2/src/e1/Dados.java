@@ -1,4 +1,5 @@
 package e1;
 
-public class Dados {
+public interface Dados {
+    public int decidirAtaque(int dado1, int dado2);
 }
