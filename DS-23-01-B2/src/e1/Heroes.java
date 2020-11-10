@@ -1,44 +1,19 @@
 package e1;
 
-public class Heroes extends Character implements Dados{
+public abstract class Heroes extends Character{
 
-    protected int ataque;
+    public abstract String getName();
+    public abstract int getLife();
+    public abstract int getShield();
 
-    @Override
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setShield(int shield) {
-        this.shield = shield;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public int getLife() {
-        return this.life;
-    }
-
-    @Override
-    public int getShield() {
-        return this.shield;
-    }
-
+    public abstract void setName(String name);
+    public abstract void setLife(int life);
+    public abstract void setShield(int shield);
     public int decidirAtaque(int dado1, int dado2){
         return Math.max(dado1, dado2);
     }
+    public abstract void calcularDammage(int ataque);
 
-    public void calcularDammage(int ataque){
-        if(ataque > this.getShield()) this.setLife(ataque - this.getShield());
-    }
+    public abstract void Atacar(int ataque, Bestias bestia);
+
 }
