@@ -45,4 +45,8 @@ public class Elfos extends Heroes{
     public void Atacar(int ataque, Bestias bestia) {
         bestia.calcularDammage(ataque);
     }
+
+    public void Atacar(int ataque, Orcos orco){
+        orco.calcularDammage(ataque + 10);
+    }
 }

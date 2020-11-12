@@ -49,4 +49,8 @@ public class Hobbits extends Heroes{
     public void Atacar(int ataque, Bestias bestia) {
         bestia.calcularDammage(ataque);
     }
+
+    public void Atacar(int ataque, Trasgos trasgo){
+        trasgo.calcularDammage(ataque - 5);
+    }
 }

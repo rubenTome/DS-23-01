@@ -58,4 +58,8 @@ public class Game {
 
         return turnos;
     }
+
+    public String toString(List<String> turnos) {
+        return turnos.toString();
+    }
 }
