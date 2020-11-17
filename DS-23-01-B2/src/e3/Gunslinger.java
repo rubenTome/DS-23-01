@@ -12,6 +12,8 @@ public class Gunslinger {
         GunslingerAction ga = behavior.action(g);
         if (ga.equals(GunslingerAction.RELOAD))
             ++loads;
+        if (ga.equals(GunslingerAction.SHOOT))
+            --loads;
         return ga;
     }
 
@@ -31,7 +33,9 @@ public class Gunslinger {
         int rivalReloads = 0;
         for (GunslingerAction ga : GunslingerActionList) {
             if (ga.equals(GunslingerAction.RELOAD))
-                rivalReloads++;
+                ++rivalReloads;
+            if (ga.equals(GunslingerAction.SHOOT))
+                --rivalReloads;
         }
         return rivalReloads;
     }

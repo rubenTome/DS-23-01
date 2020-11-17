@@ -29,7 +29,7 @@ public class Gunfight {
                 if (ga1.equals(ga2) && (ga1.equals(GunslingerAction.MACHINE_GUN) || ga1.equals(GunslingerAction.SHOOT)))
                     System.out.println("tie");
                 else {
-                    if (ga1.equals(GunslingerAction.SHOOT))
+                    if (ga1.equals(GunslingerAction.SHOOT) || ga1.equals(GunslingerAction.MACHINE_GUN))
                         System.out.println("GUNSLINGER 1");
                     else System.out.println("GUNSLINGER 2");
                 }

@@ -4,10 +4,15 @@ import e3.Behavior;
 import e3.Gunslinger;
 import e3.GunslingerAction;
 
+import java.util.Random;
+
 public class testBehavior implements Behavior {
-    private int count = -1;
+    Random r = new Random();
 
     public GunslingerAction action(Gunslinger g) {
-        return GunslingerAction.PROTECT;
+        if (g.getLoads() == 5)
+            return GunslingerAction.MACHINE_GUN;
+        else
+            return GunslingerAction.RELOAD;
     }
 }

@@ -23,59 +23,24 @@ class TestClass {
         assertTrue(true);
     }
 
-
     @Test
     void testRivalLoad() {
         Gunslinger g11 = new Gunslinger();
         g11.setBehavior(be);
         g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.SHOOT);//2 acciones del rival
+        g11.rivalAction(GunslingerAction.SHOOT);
+        g11.rivalAction(GunslingerAction.RELOAD);//3 acciones del rival
         assertEquals(g11.getRivalLoads(), 1);
     }
 
     @Test
-    void testRound4Protect() {
-        Gunslinger g11 = new Gunslinger();
+    void testDS() {
         Gunslinger g1 = new Gunslinger();
-        g11.setBehavior(be);
         g1.setBehavior(be);
-        g11.rivalAction(GunslingerAction.RELOAD);//ronda 1
-        g11.rivalAction(GunslingerAction.RELOAD);//ronda 2
-        g11.rivalAction(GunslingerAction.PROTECT);//ronda 3
-        assertEquals(g11.action(g11), GunslingerAction.PROTECT);
-    }
-
-    @Test
-    void testRound4Reload() {
-        Gunslinger g11 = new Gunslinger();
-        g11.setBehavior(be);
-        g11.rivalAction(GunslingerAction.RELOAD);//ronda 1
-        g11.rivalAction(GunslingerAction.RELOAD);//ronda 2
-        assertEquals(g11.action(g11), GunslingerAction.PROTECT);
-        g11.rivalAction(GunslingerAction.RELOAD);//ronda 3
-        assertEquals(g11.action(g11), GunslingerAction.RELOAD);
-    }
-
-    @Test
-    void testRound5Shoot() {
-        Gunslinger g11 = new Gunslinger();
-        g11.setBehavior(be);
-        g11.action(g11);//recarga
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);//4 recargas del rival
-        assertEquals(g11.action(g11), GunslingerAction.SHOOT);
-    }
-
-    @Test
-    void test5Reload() {
-        Gunslinger g11 = new Gunslinger();
-        g11.setBehavior(be);
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);
-        g11.rivalAction(GunslingerAction.RELOAD);//4 recargas del rival
-        assertEquals(g11.action(g11), GunslingerAction.RELOAD);//?
+        g1.action(g1);
+        g1.rivalAction(GunslingerAction.RELOAD);
+        g1.rivalAction(GunslingerAction.RELOAD);
+        g1.rivalAction(GunslingerAction.RELOAD);//cargas bien guardadas
+        assertEquals(g1.action(g1), GunslingerAction.SHOOT);
     }
 }
