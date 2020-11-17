@@ -1,7 +1,5 @@
 package e3;
 
-import e3.behaviors.*;
-
 public class Gunfight {
     public void duel(Gunslinger g1, Gunslinger g2) {
         GunslingerAction ga1;
@@ -10,8 +8,8 @@ public class Gunfight {
         int MAX = 25;
         int counter = 1;
         while (counter <= MAX) {
-            ga1 =  g1.action(g2);
-            ga2 = g2.action(g1);
+            ga1 = g1.action(g1);
+            ga2 = g2.action(g2);
             System.out.println("Round " + counter + "- - - - - - - - - - - - - - - - - - - - - - - - -\n");
             System.out.println("Gunslinger 1: " + ga1 + "\n");
             System.out.println("Gunslinger 2: " + ga2 + "\n");

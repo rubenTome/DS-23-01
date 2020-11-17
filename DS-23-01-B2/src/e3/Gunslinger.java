@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gunslinger {
-    private  Behavior behavior;
+    private Behavior behavior;
     private int loads = 0;
-    private final List <GunslingerAction> GunslingerActionList = new ArrayList<>();//lista de acciones del rival
+    private final List<GunslingerAction> GunslingerActionList = new ArrayList<>();//lista de acciones del rival
 
     public GunslingerAction action(Gunslinger g) {
         GunslingerAction ga = behavior.action(g);
@@ -15,21 +15,29 @@ public class Gunslinger {
         return ga;
     }
 
-    public int getLoads() {return loads;}
+    public int getLoads() {
+        return loads;
+    }
 
-    public void rivalAction(GunslingerAction action) {GunslingerActionList.add(action);}
+    public void rivalAction(GunslingerAction action) {
+        GunslingerActionList.add(action);
+    }
 
-    public List<GunslingerAction> getRivalActions() {return GunslingerActionList;}
+    public List<GunslingerAction> getRivalActions() {
+        return GunslingerActionList;
+    }
 
     public int getRivalLoads() {
         int rivalReloads = 0;
-        for (GunslingerAction ga: GunslingerActionList) {
+        for (GunslingerAction ga : GunslingerActionList) {
             if (ga.equals(GunslingerAction.RELOAD))
                 rivalReloads++;
         }
         return rivalReloads;
     }
 
-    public void setBehavior (Behavior behavior) {this.behavior = behavior;}
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
+    }
 
 }

@@ -30,13 +30,8 @@ public class DS_23_01 implements Behavior {
                     return GunslingerAction.SHOOT;
                 else
                     return GunslingerAction.RELOAD;
-            } else {//ojo con esto
-                if (g.getLoads() == 0)
-                    return GunslingerAction.RELOAD;//temporal
-                else if (random.nextInt(2) == 1)
-                    return GunslingerAction.PROTECT;
-                else return GunslingerAction.RELOAD;
-            }
+            } else
+                return GunslingerAction.RELOAD;//temporal, hay que modificar a partir de aqui
         } else return GunslingerAction.RELOAD;//round 1
     }
 }

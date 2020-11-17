@@ -8,10 +8,6 @@ public class testBehavior implements Behavior {
     private int count = -1;
 
     public GunslingerAction action(Gunslinger g) {
-        ++count;
-        if (count == 5)
-            return GunslingerAction.MACHINE_GUN;
-        else
-            return GunslingerAction.RELOAD;
+        return GunslingerAction.PROTECT;
     }
 }
