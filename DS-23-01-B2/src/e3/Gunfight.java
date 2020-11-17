@@ -4,12 +4,8 @@ import e3.behaviors.*;
 
 public class Gunfight {
     public void duel(Gunslinger g1, Gunslinger g2) {
-        DS_23_01 behavior = new DS_23_01();
-        testBehavior behavior2 = new testBehavior();
         GunslingerAction ga1;
         GunslingerAction ga2;
-        g1.setBehavior(behavior);
-        g2.setBehavior(behavior2);//behavior2 es para pruebas, recarga hasta poder ametrallar
 
         int MAX = 25;
         int counter = 1;

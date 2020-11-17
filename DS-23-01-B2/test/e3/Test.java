@@ -6,37 +6,80 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestClass {
+
+    DS_23_01 be = new DS_23_01();
+
     @Test
-    void Test() {
-        Gunfight g = new Gunfight();
+    void TestDuel() {
+        testBehavior tBe = new testBehavior();
         Gunslinger g1 = new Gunslinger();
         Gunslinger g2 = new Gunslinger();
-        g.duel(g1, g2);
-        //
-        g1 = new Gunslinger();
-        g2 = new Gunslinger();
-        testBehavior tB = new testBehavior();
-        g1.setBehavior(tB);
-        g2.setBehavior(tB);
+        g1.setBehavior(be);
+        g2.setBehavior(tBe);
+        Gunfight g = new Gunfight();
+        g.duel(g1, g2);//
+        assertTrue(true);
+    }
 
-        assertEquals(g1.action(g2), GunslingerAction.RELOAD);//DUDAS DE SI ESTA OK EL TEST
-        g2.rivalAction(GunslingerAction.RELOAD);
-        assertEquals(g2.getRivalLoads(), 1);
-        assertEquals(g1.action(g2), GunslingerAction.RELOAD);
-        g2.rivalAction(GunslingerAction.RELOAD);
-        assertEquals(g2.getRivalLoads(), 2);
-        assertEquals(g1.action(g2), GunslingerAction.RELOAD);
-        g2.rivalAction(GunslingerAction.RELOAD);
-        assertEquals(g2.getRivalLoads(), 3);
-        assertEquals(g1.action(g2), GunslingerAction.RELOAD);
-        g2.rivalAction(GunslingerAction.RELOAD);
-        assertEquals(g2.getRivalLoads(), 4);
-        assertEquals(g1.action(g2), GunslingerAction.RELOAD);
-        g2.rivalAction(GunslingerAction.RELOAD);
-        assertEquals(g2.getRivalLoads(), 5);
-        assertEquals(g1.action(g2), GunslingerAction.MACHINE_GUN);
+    @Test
+    void testRound4Protect() {
+        Gunslinger g11 = new Gunslinger();
+        Gunslinger g1 = new Gunslinger();
+        g11.setBehavior(be);
+        g1.setBehavior(be);
+        g1.rivalAction(GunslingerAction.RELOAD);//ronda 1
+        g1.rivalAction(GunslingerAction.RELOAD);//ronda 2
+        g1.rivalAction(GunslingerAction.PROTECT);//ronda 3
+        assertEquals(g11.action(g1), GunslingerAction.PROTECT);
+    }
 
+    @Test
+    void testRound4Reload() {
+        Gunslinger g11 = new Gunslinger();
+        Gunslinger g1 = new Gunslinger();
+        g11.setBehavior(be);
+        g1.setBehavior(be);
+        g1.rivalAction(GunslingerAction.RELOAD);//ronda 1
+        g1.rivalAction(GunslingerAction.RELOAD);//ronda 2
+        assertEquals(g11.action(g1), GunslingerAction.PROTECT);
+        g1.rivalAction(GunslingerAction.RELOAD);//ronda 3
+        assertEquals(g11.action(g1), GunslingerAction.RELOAD);
+    }
 
+    @Test
+    void testRound5Shoot() {
+        Gunslinger g11 = new Gunslinger();
+        Gunslinger g1 = new Gunslinger();
+        g11.setBehavior(be);
+        g1.setBehavior(be);
+        g1.rivalAction(GunslingerAction.RELOAD);
+        g1.rivalAction(GunslingerAction.RELOAD);
+        g1.rivalAction(GunslingerAction.RELOAD);
+        g1.rivalAction(GunslingerAction.RELOAD);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
