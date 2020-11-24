@@ -1,7 +1,7 @@
 package e1;
 
 public class Character {
-    String name;
-    int life;
-    int shield;
+    protected String name;//necesario protected?
+    protected int life;
+    protected int shield;
 }
