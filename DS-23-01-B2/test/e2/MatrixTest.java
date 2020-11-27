@@ -12,6 +12,7 @@ class MatrixTest {
     int[] ar1 = {7,8,9};
     int[] ar2 = {1,4,7};
     int[][] notarr = {{1,1,1}, {1,2}, {3,3,3}};
+    int[][] notarr2 = {{1,1,1}, null, {3,3,3}};
     int [][] arr2 = new int[3][3];
     Matrix m1 = new Matrix(arr1);
     Matrix m2 = new Matrix(3,3);
@@ -66,11 +67,15 @@ class MatrixTest {
         //Lecturas no válidas
         assertThrows(IllegalArgumentException.class, () -> m1.getColumna(4));
         assertThrows(IllegalArgumentException.class, () -> m1.getFila(4));
+        assertThrows(IllegalArgumentException.class, () -> m1.getCelda(4, 4));
+        assertThrows(IllegalArgumentException.class, () -> m1.getCelda(0, 4));
 
         //Modificaciones no válidas
         assertThrows(IllegalArgumentException.class, () -> m1.setCelda(4,4,1));
-        assertThrows(IllegalArgumentException.class, () -> m1.getCelda(4, 4));
+        assertThrows(IllegalArgumentException.class, () -> m1.setCelda(0,4,1));
         assertThrows(IllegalArgumentException.class, () -> new Matrix(notarr));
+        assertThrows(NullPointerException.class, () -> new Matrix(notarr2));
+        assertThrows(NullPointerException.class, () -> new Matrix(null));
 
 
         //Remove
