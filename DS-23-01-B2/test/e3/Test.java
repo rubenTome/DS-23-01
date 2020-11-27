@@ -47,7 +47,7 @@ class TestClass {
         /*
         en esta secuencia, el test se hace suponiendo que el rival
         nunca recarga para no modificar los intervalos que corresponden
-        a cada acccion. Ademas se utiliza la semilla 1 en la clase Random,
+        a cada acccion. Ademas se utiliza la semilla 2 en la clase Random,
         que nos dara la secuencia: 8(RELOAD SIEMPRE AL COMIENZO)-2(SHOOT)-0(NO SHOOT: NO HAY BALAS)-7(PROTECT)
         */
         g1 = new Gunslinger();
