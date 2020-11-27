@@ -7,24 +7,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestClass {
-
-    DS_23_01 be = new DS_23_01();
-    DS_23_01 be2 = new DS_23_01();
-
     @Test
     void TestDuel() {
+        DS_23_01 be = new DS_23_01();
+
         testBehavior tBe = new testBehavior();
         Gunslinger g1 = new Gunslinger();
         Gunslinger g2 = new Gunslinger();
         g1.setBehavior(be);
         g2.setBehavior(tBe);
         Gunfight g = new Gunfight();
-        g.duel(g1, g2);//
-        assertTrue(true);
+        g.duel(g1, g2);
+        assertTrue(true);//solo usado para ver salida de gunfight
     }
 
     @Test
     void testRivalLoad() {
+        DS_23_01 be = new DS_23_01();
+
         Gunslinger g11 = new Gunslinger();
         g11.setBehavior(be);
         g11.rivalAction(GunslingerAction.RELOAD);
@@ -35,19 +35,22 @@ class TestClass {
 
     @Test
     void testDS() {
+        DS_23_01 be = new DS_23_01();
+        DS_23_01 be2 = new DS_23_01();
+
         Gunslinger g1 = new Gunslinger();
         g1.setBehavior(be);
         g1.action(g1);//recargamos en primer turno
         g1.rivalAction(GunslingerAction.RELOAD);
         g1.rivalAction(GunslingerAction.RELOAD);
-        g1.rivalAction(GunslingerAction.RELOAD);//cargas bien guardadas
+        g1.rivalAction(GunslingerAction.RELOAD);
         assertEquals(g1.action(g1), GunslingerAction.SHOOT);
         assertNotEquals(g1.action(g1), GunslingerAction.SHOOT);//no puede disparar, no tiene balas
 
         /*
         en esta secuencia, el test se hace suponiendo que el rival
-        nunca recarga para no modificar los intervalos que corresponden
-        a cada acccion. Ademas se utiliza la semilla 2 en la clase Random,
+        nunca recarga para no modificar los intervalos de probabilidades
+        que corresponden a cada acccion. Ademas se utiliza la semilla 2 en la clase Random,
         que nos dara la secuencia: 8(RELOAD SIEMPRE AL COMIENZO)-2(SHOOT)-0(NO SHOOT: NO HAY BALAS)-7(PROTECT)
         */
         g1 = new Gunslinger();
@@ -59,6 +62,5 @@ class TestClass {
         assertNotEquals(g1.action(g1), GunslingerAction.PROTECT);
         g1.rivalAction(GunslingerAction.PROTECT);
         assertEquals(g1.action(g1), GunslingerAction.PROTECT);
-        //revision de DS_23_01
     }
 }
