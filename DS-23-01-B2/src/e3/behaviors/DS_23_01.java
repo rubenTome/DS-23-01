@@ -8,28 +8,32 @@ import java.util.List;
 import java.util.Random;
 
 public class DS_23_01 implements Behavior {
-    Random random = new Random();
-    int prob, rivalLoads;
-    List <GunslingerAction> rivalActions;
+    private final Random r = new Random(2);
+    int prob, rivalLoads, limite;
+    List<GunslingerAction> rivalActions;
+
 
     public GunslingerAction action(Gunslinger g) {
-        Random r = new Random();
         prob = r.nextInt(10);
         rivalLoads = g.getRivalLoads();
         rivalActions = g.getRivalActions();
+        limite = rivalLoads + 4;
+        if (prob >= 8)
+            prob = 8;
 
         if (g.getRivalActions().size() == 0)
             return GunslingerAction.RELOAD;
 
-        if (rivalLoads == 3 && g.getLoads() > 0)
+        if (rivalLoads >= 3 && g.getLoads() > 0)
             return GunslingerAction.SHOOT;
 
-        if (prob < 4) {
+
+        if (prob < limite) {
             if (g.getLoads() > 0)
                 return GunslingerAction.SHOOT;
         }
 
-        if (prob > 3 && prob < 8)
+        if (prob >= limite && prob < 8)
             return GunslingerAction.PROTECT;
 
         else
