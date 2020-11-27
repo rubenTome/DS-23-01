@@ -24,8 +24,7 @@ public class Gunfight {
             )
                 System.out.println("The duel continues . . .\n");
             else {
-                System.out.println("\nThe duel has ended \n\n");
-                System.out.println("Winner: ");//temporal
+                System.out.println("\nThe duel has ended \n\nWinner: ");
                 if (ga1.equals(ga2) && (ga1.equals(GunslingerAction.MACHINE_GUN) || ga1.equals(GunslingerAction.SHOOT)))
                     System.out.println("tie");
                 else {

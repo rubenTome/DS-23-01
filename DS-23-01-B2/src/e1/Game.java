@@ -1,7 +1,6 @@
 package e1;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -24,16 +23,8 @@ public class Game {
         }
     }
 
-    public List<String> batalla(ArrayList< ? extends Heroes> heroes, ArrayList<? extends Bestias> bestias){
-
-        Dados dadoH1 = new Dados();
-        Dados dadoH2 = new Dados();
-        Dados dadoB = new Dados();
+    public List<String> batalla(ArrayList< ? extends Heroes> heroes, ArrayList<? extends Bestias> bestias, Dados dadoH1, Dados dadoH2, Dados dadoB){
         Random num = new Random(1);
-
-        dadoH1.setAtaque(num.nextInt(101));
-        dadoH2.setAtaque(num.nextInt(101));
-        dadoB.setAtaque(num.nextInt(91));
 
         List<String> turnos = new ArrayList<>();
         int ataqueHeroe, ataqueBestia;
@@ -42,6 +33,10 @@ public class Game {
         while(heroes.size() != 0 && bestias.size() != 0){
             turnos.add("\nTurn " + j + ": \n");
             for(int i = 0; i < Math.min(heroes.size(),bestias.size()); i++){
+                dadoH1.setAtaque(num.nextInt(101));
+                dadoH2.setAtaque(num.nextInt(101));
+                dadoB.setAtaque(num.nextInt(91));
+
                 if(heroes.get(i) != null && bestias.get(i) != null){
                     turnos.add("Fight between " + heroes.get(i).getName() + "(Energy = " + heroes.get(i).getLife()
                     + ")" + " and " + bestias.get(i).getName() + "(Energy = " + bestias.get(i).getLife() + ")\n");
@@ -61,9 +56,5 @@ public class Game {
         else turnos.add("HEROES WIN !!\n");
 
         return turnos;
-    }
-
-    public String toString(List<String> turnos) {
-        return turnos.toString();
     }
 }

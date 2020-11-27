@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class DS_23_01 implements Behavior {
     private final Random r = new Random(2);
-    int prob, rivalLoads, limite;
-    List<GunslingerAction> rivalActions;
+    private int prob, rivalLoads, limite;
+    private List<GunslingerAction> rivalActions;
 
 
     public GunslingerAction action(Gunslinger g) {
@@ -23,10 +23,6 @@ public class DS_23_01 implements Behavior {
 
         if (g.getRivalActions().size() == 0)
             return GunslingerAction.RELOAD;
-
-        if (rivalLoads >= 3 && g.getLoads() > 0)
-            return GunslingerAction.SHOOT;
-
 
         if (prob < limite) {
             if (g.getLoads() > 0)

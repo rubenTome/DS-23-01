@@ -24,6 +24,10 @@ class GameTest {
 
     @Test
     void batalla() {
+        Dados dadoH1 = new Dados();
+        Dados dadoH2 = new Dados();
+        Dados dadoB = new Dados();//modificado el tema de dados, revisar
+
         heroes.add(elfos);
         heroes.add(humanos);
         heroes.add(hobbits);
@@ -31,7 +35,7 @@ class GameTest {
         bestias.add(trasgos);
 
         game = new Game();
-        batalla = game.batalla(heroes, bestias);
+        batalla = game.batalla(heroes, bestias, dadoH1, dadoH2, dadoB);
 
 
     }
