@@ -11,13 +11,13 @@ public class Game {
 
         for(int i = 0; i < heroes.size(); i++){
             if(heroes.get(i).getLife() <= 0){
-                turnos.add(heroes.get(i).getClass() + " " + heroes.get(i).getName() + " dies\n");
+                turnos.add(heroes.get(i).getClass().getSimpleName() + " " + heroes.get(i).getName() + " dies\n");
                 heroes.remove(heroes.get(i));
             }
         }
         for(int j = 0; j < bestias.size(); j++){
             if(bestias.get(j).getLife() <= 0){
-                turnos.add(bestias.get(j).getClass() + " " + bestias.get(j).getName() + " dies\n");
+                turnos.add(bestias.get(j).getClass().getSimpleName() + " " + bestias.get(j).getName() + " dies\n");
                 bestias.remove(bestias.get(j));
             }
         }
@@ -38,8 +38,8 @@ public class Game {
                 dadoB.setAtaque(num.nextInt(91));
 
                 if(heroes.get(i) != null && bestias.get(i) != null){
-                    turnos.add("Fight between " + heroes.get(i).getName() + "(Energy = " + heroes.get(i).getLife()
-                    + ")" + " and " + bestias.get(i).getName() + "(Energy = " + bestias.get(i).getLife() + ")\n");
+                    turnos.add("Fight between " + heroes.get(i).getName() + " (Energy = " + heroes.get(i).getLife()
+                    + ")" + " and " + bestias.get(i).getName() + " (Energy = " + bestias.get(i).getLife() + ")\n");
 
                     ataqueHeroe = heroes.get(i).decidirAtaque(dadoH1.getAtaque(),dadoH2.getAtaque());
                     ataqueBestia = bestias.get(i).decidirAtaque(dadoB.getAtaque());
