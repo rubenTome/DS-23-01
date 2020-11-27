@@ -27,11 +27,11 @@ class GameTest {
     Trasgos trasgos = new Trasgos("Trasgo", 50, 50);
 
 
-    Elfos elfos2 = new Elfos("Elfo2", 50, 20);
-    Humanos humanos2 = new Humanos("humano2",50 , 50);
-    Hobbits hobbits2 = new Hobbits("Hobbit2", 50, 30 );
-    Orcos orcos2 = new Orcos("Orco2", 100, 50);
-    Trasgos trasgos2 = new Trasgos("Trasgo2", 50, 50);
+    Elfos elfos2 = new Elfos("Elder", 70, 50);
+    Humanos humanos2 = new Humanos("Doctor Who",50 , 30);
+    Hobbits hobbits2 = new Hobbits("Frodo", 60, 40 );
+    Orcos orcos2 = new Orcos("Goliath", 80, 50);
+    Trasgos trasgos2 = new Trasgos("Golum", 50, 50);
 
     @Test
     void batalla() {
