@@ -15,9 +15,12 @@ public class Matrix implements Iterable<Integer>{
         this.columnas = columns;
     }
     public Matrix(int [][] m){
-        this.matriz = new int[m.length][m[0].length];
+        if(m == null) throw new NullPointerException();
+        else this.matriz = new int[m.length][m[0].length];
+
         for(int i = 0; i < m.length - 1; i++){
             if(m[i].length != m[i+1].length) throw new IllegalArgumentException();
+            if(m[i] == null) throw new NullPointerException();
         }
 
 
@@ -61,6 +64,10 @@ public class Matrix implements Iterable<Integer>{
         }
     }
 
+    public SelectIterator getIterator() {
+        return iterator;
+    }
+
     public void setIterator(SelectIterator iterator) {
         this.iterator = iterator;
     }
@@ -80,7 +87,7 @@ public class Matrix implements Iterable<Integer>{
 
         if (column < matriz[0].length) {
             for(int r = 0; r < matriz.length; r++){
-                for(Integer c : matriz[r]){
+                for(int c = 0; c < matriz[0].length; c++){
                     if(c == column) columna[r] = this.getCelda(r,c);
                 }
             }
@@ -95,7 +102,8 @@ public class Matrix implements Iterable<Integer>{
         for(int r = 0; r < matriz.length; r++){
             matrixBuilder.append("[");
             for(int c = 0; c < matriz[0].length; c++){
-                matrixBuilder.append(this.getCelda(r,c)).append(", ");
+                if(c == matriz[0].length - 1) matrixBuilder.append(this.getCelda(r,c));
+                else matrixBuilder.append(this.getCelda(r,c)).append(", ");
             }
             matrixBuilder.append("]\n");
         }
@@ -129,29 +137,19 @@ public class Matrix implements Iterable<Integer>{
 
         @Override
         public boolean hasNext() {
-            if(indexc < integerMatrix[0].length) return true;
-            else {
-                return indexr++ < integerMatrix.length;
-            }
+            if(indexr >= integerMatrix.length) return false;
+            return indexc < integerMatrix[0].length || (indexr < integerMatrix.length &&
+                    indexr != integerMatrix.length - 1);
         }
 
         @Override
         public Integer next() {
-            int valor;
-            if(indexc < integerMatrix[0].length){
-                valor = integerMatrix[indexr][indexc];
-                indexc++;
+            if(!hasNext()) throw new NoSuchElementException();
+            if(indexc >= integerMatrix[0].length){
+                indexr++;
+                indexc = 0;
             }
-            else{
-                if(hasNext()){
-                   indexc = 0;
-                   indexr++;
-                   valor = integerMatrix[indexr][indexc];
-                   indexc++;
-                }
-                else throw new NoSuchElementException();
-            }
-            return valor;
+            return integerMatrix[indexr][indexc++];
         }
 
         @Override
@@ -171,29 +169,19 @@ public class Matrix implements Iterable<Integer>{
 
         @Override
         public boolean hasNext() {
-            if(indexr < integerMatrix.length) return true;
-            else {
-                return indexc++ < integerMatrix[0].length;
-            }
+            if(indexc >= integerMatrix[0].length) return false;
+            return indexr < integerMatrix.length || (indexc < integerMatrix[0].length &&
+                    indexc != integerMatrix[0].length - 1);
         }
 
         @Override
         public Integer next() {
-            int valor;
-            if(indexr < integerMatrix.length){
-                valor = integerMatrix[indexr][indexc];
-                indexr++;
+            if(!hasNext()) throw new NoSuchElementException();
+            if(indexr >= integerMatrix.length){
+                indexc++;
+                indexr = 0;
             }
-            else{
-                if(hasNext()){
-                    indexr = 0;
-                    indexc++;
-                    valor = integerMatrix[indexr][indexc];
-                    indexr++;
-                }
-                else throw new NoSuchElementException();
-            }
-            return valor;
+            return integerMatrix[indexr++][indexc];
         }
 
         @Override
