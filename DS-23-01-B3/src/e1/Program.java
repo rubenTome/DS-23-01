@@ -9,29 +9,35 @@ public class Program implements modoFun{
     }
 
     public void funcionar(Termostato termostato, float temperature) {
-        if ((!termostato.getModo().equals(Timer.getInstancia()))) {
-            if (primeraVez)
+        if (termostato.getConflicto() != 1) {
+            if (primeraVez) {
                 consigna = temperature;
-            if (termostato.getCurrentTemperature() < temperature) {
+                primeraVez = false;
+                termostato.setConflicto(2);
+            }
+            else if (termostato.getCurrentTemperature() < temperature) {
                 termostato.setEncendido(true);
-                termostato.setLog(termostato.getCurrentTemperature() + "Modo program (a " + temperature + "grados)"
+                termostato.setLog(termostato.getCurrentTemperature() + " Modo program (a " + temperature + " grados)"
                         + " - Calefacción encendida\n");
             }
             else {
                 termostato.setEncendido(false);
                 primeraVez = true;
-                termostato.setLog(termostato.getCurrentTemperature() + "Modo program (a " + temperature + "grados)"
+                termostato.setLog(termostato.getCurrentTemperature() + " Modo program (a " + temperature + " grados)"
                         + " - Calefacción apagada\n");
+                termostato.setModo(Off.getInstancia());
             }
         }
-        else
+        else {
             System.out.println("No se puede cambiar a program\n");
+            termostato.setModo(Timer.getInstancia());
+        }
     }
 
     public void screenInfo(Termostato termostato) {
         if (termostato.getEncendido())
-        System.out.println(termostato.getCurrentTemperature() + " ON P " + consigna);
+        System.out.println(termostato.getCurrentTemperature() + " ON P " + consigna + "\n");
         else
-            System.out.println(termostato.getCurrentTemperature() + " OFF P " + consigna);
+            System.out.println(termostato.getCurrentTemperature() + " OFF P " + consigna + "\n");
     }
 }

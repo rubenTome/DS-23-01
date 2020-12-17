@@ -6,6 +6,7 @@ public class Termostato {
     private float currentTemperature;
     private int time;//esta en minutos
     private modoFun modo;
+    private int conflicto = 0;//para saber cuando se cambia de timer a program o viceversa
 
     public void newTemperature(float currentTemperature) {
         this.currentTemperature = currentTemperature;
@@ -47,4 +48,12 @@ public class Termostato {
     }
 
     public StringBuilder getLog() {return log;}
+
+    public void setConflicto(int conflicto) {
+        this.conflicto = conflicto;
+    }
+
+    public int getConflicto() {
+        return this.conflicto;
+    }
 }
