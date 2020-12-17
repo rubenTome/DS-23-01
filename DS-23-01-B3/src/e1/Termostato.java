@@ -9,7 +9,9 @@ public class Termostato {
 
     public void newTemperature(float currentTemperature) {
         this.currentTemperature = currentTemperature;
-        time += 5;
+        time -= 5;
+        if (time < 0)
+            time = 0;
     }
 
     public void screenInfo() {
@@ -27,6 +29,8 @@ public class Termostato {
     public int getTime() {
         return time;
     }
+
+    public void setTime(int time) {this.time = time;}
 
     public float getCurrentTemperature() {
         return currentTemperature;

@@ -1,7 +1,6 @@
 package e1;
 
 public class Timer implements modoFun {
-    private int time;
     private boolean primeraVez = true;
 
     private static final Timer instancia = new Timer();
@@ -15,20 +14,26 @@ public class Timer implements modoFun {
             if (primeraVez) {
                 termostato.setEncendido(true);
                 primeraVez = false;
-                this.time = time;
+                termostato.setTime(time);
                 termostato.setLog("Se activa el modo timer " + time + " minutos\n");
-                this.time -= 5;
+                termostato.setTime(termostato.getTime() - 5);
+                if (termostato.getTime() < 0)//duda
+                    termostato.setTime(0);
             } else {
-                if (this.time > 0) {
-                    termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + this.time
+                if (termostato.getTime() > 0) {
+                    termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + termostato.getTime()
                             + " minutos) - calefacción encendida\n");
-                    this.time -= 5;
+                    termostato.setTime(termostato.getTime() - 5);
+                    if (termostato.getTime() < 0)//duda
+                        termostato.setTime(0);
                 }
-                else {
+                else {//FALTA CAMBIAR A MODO OFF, AQUI E EN MAIS SITIOS
                     termostato.setEncendido(false);
                     primeraVez = true;
-                    this.time = -1;
+                    termostato.setTime(0);
                     termostato.setLog("Se desactiva el modo timer\n");
+                    Off off = new Off();
+                    termostato.setModo(off);
                 }
             }
         } else
@@ -36,9 +41,14 @@ public class Timer implements modoFun {
     }
 
     public void screenInfo(Termostato termostato) {
-        if (termostato.getEncendido())
-            System.out.println(termostato.getCurrentTemperature() + " ON T " + this.time + "\n");
+        if (termostato.getEncendido()) {
+            if (termostato.getTime() > 0)
+                System.out.println(termostato.getCurrentTemperature() + " ON T " + termostato.getTime() + "\n");
+            else
+                System.out.println(termostato.getCurrentTemperature() + " OFF T " + termostato.getTime() + "\n");
+
+        }
         else
-            System.out.println(termostato.getCurrentTemperature() + " OFF T " + this.time + "\n");
+            System.out.println(termostato.getCurrentTemperature() + " OFF T " + termostato.getTime() + "\n");
     }
 }

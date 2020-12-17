@@ -7,27 +7,33 @@ class TermostatoTest {
     @Test
     void test() {
         Termostato termostato = new Termostato();
-        Off modoO = new Off();
-        Manual modoM = new Manual();
-        Program modoP = new Program();
-        Timer modoT = new Timer();//tiempos que sean multiplos de 5 siempre,
-        termostato.setModo(modoT);
+        termostato.setModo(Off.getInstancia());
+        termostato.newTemperature(10);
                 //sucesos en termostato
         //TIMER
-        termostato.newTemperature(10);
-        termostato.getModo().funcionar(termostato, 9);//de 5 en 5 minutos
         termostato.screenInfo();
-
-        termostato.newTemperature(13);
-        termostato.getModo().funcionar(termostato, 9);
+        termostato.setModo(Timer.getInstancia());
+        termostato.getModo().funcionar(termostato, 21);
         termostato.screenInfo();
-
-        termostato.newTemperature(17);
-        termostato.getModo().funcionar(termostato, 9);
+        termostato.getModo().funcionar(termostato, 21);
         termostato.screenInfo();
-
         termostato.newTemperature(16);
-        termostato.getModo().funcionar(termostato, 16);
+        termostato.getModo().funcionar(termostato, 21);
+        termostato.screenInfo();
+        termostato.getModo().funcionar(termostato, 21);
+        termostato.screenInfo();
+        termostato.getModo().funcionar(termostato, 21);
+        termostato.screenInfo();
+        termostato.getModo().funcionar(termostato, 40);
+        termostato.screenInfo();
+        termostato.getModo().funcionar(termostato);
+
+        //PROGRAM
+        System.out.println("----------\n");
+        termostato = new Termostato();
+        termostato.newTemperature(15);
+        termostato.setModo(Program.getInstancia());
+        termostato.getModo().funcionar(termostato, 20);
         termostato.screenInfo();
 
                 //fin sucesos en termostato
