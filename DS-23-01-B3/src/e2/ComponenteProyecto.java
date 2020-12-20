@@ -16,9 +16,11 @@ public abstract class ComponenteProyecto {
         this.name = name;
     }
 
-    public abstract int totalHours();
+    public abstract int totalHours(String projectName);
 
-    public abstract int totalSalary();
+    public abstract int totalSalary(String projectName);
 
-    public abstract void printComponents();
+    public abstract void printComponents(String projectName);
+
+    public abstract void addProjectEntry(String projectName);
 }

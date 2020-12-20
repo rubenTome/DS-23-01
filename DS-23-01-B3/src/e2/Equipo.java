@@ -23,31 +23,39 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
-    public int totalSalary(){
+    public void addProjectEntry(String projectName){
+        for(ComponenteProyecto comp : listcomp){
+            comp.addProjectEntry(projectName);
+        }
+    }
+
+    @Override
+    public int totalSalary(String projectName){
         int salario = 0;
         for(ComponenteProyecto comp : listcomp){
-            salario += comp.totalSalary();
+            salario += comp.totalSalary(projectName);
         }
         return salario;
     }
 
     @Override
-    public int totalHours(){
+    public int totalHours(String projectName){
         int horas = 0;
         for(ComponenteProyecto comp : listcomp){
-            horas += comp.totalHours();
+            horas += comp.totalHours(projectName);
         }
         return horas;
     }
 
     @Override
-    public void printComponents(){
+    public void printComponents(String projectName){
 
-        System.out.println(getName() + ": " + totalHours() + ", " + totalSalary());
+        System.out.println("Team " + getName() + ": " + totalHours(projectName) + " hours, " +
+                totalSalary(projectName) + " €");
 
         for(ComponenteProyecto comp : listcomp){
-            System.out.println("\t");
-            comp.printComponents();
+            System.out.print("\t");
+            comp.printComponents(projectName);
         }
     }
 
