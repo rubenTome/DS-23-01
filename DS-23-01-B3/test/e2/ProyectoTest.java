@@ -11,8 +11,8 @@ class ProyectoTest {
 
     Random rand = new Random();
 
-    Proyecto p1 = new Proyecto("Projecto 1");
-    Proyecto p2 = new Proyecto("Projecto 2");
+    Proyecto p1 = new Proyecto("BITCOIN GENERATOR");
+    Proyecto p2 = new Proyecto("HACKING DESIGN");
 
     Equipo eq1 = new Equipo("BITCOINNERS");
     Equipo eq2 = new Equipo("RECHEA");
@@ -24,10 +24,10 @@ class ProyectoTest {
     Trabajador Ruben = new Trabajador("Ruben", 25);
     Trabajador Mauro = new Trabajador("Mauro", 25);
     Trabajador Abel = new Trabajador("Abel", 20);
-    Trabajador Anxo = new Trabajador("Anxo", 15);
+    Trabajador Anxo = new Trabajador("Anxo", 20);
     Trabajador Carla = new Trabajador("Carla", 15);
     Trabajador Marcos = new Trabajador("Marcos", 10);
-    Trabajador Jacobo = new Trabajador("Jacobo", 20);
+    Trabajador Jacobo = new Trabajador("Jacobo", 35);
 
     @Test
     void test(){
@@ -49,36 +49,53 @@ class ProyectoTest {
 
         //Imprimir componentes de un proyecto
 
-        System.out.println("PROYECTO 1\n");
+        System.out.println(p1.getName() + "\n");
         p1.printProyect();
 
         System.out.println("--------------");
 
-        System.out.println("PROYECTO 2\n");
+        System.out.println(p2.getName() + "\n");
         p2.printProyect();
 
 
-        // Paso de una jornada
+        // Paso de varias jornadas
         System.out.println("--------------\n\n");
         for(ComponenteProyecto comp : p1.getTeams()){
             comp.endJourney(p1.getName(), 10);
         }
-        Carla.endJourney(p1.getName(), 2 + rand.nextInt(30));
-        Anxo.endJourney(p1.getName(), 2 + rand.nextInt(30));
-        Abel.endJourney(p1.getName(), 2 + rand.nextInt(50));
-        Ruben.endJourney(p1.getName(), 2 + rand.nextInt(15));
-        p1.printProyect();
 
-        System.out.println("--------------\n\n");
         for(ComponenteProyecto comp : p2.getTeams()){
             comp.endJourney(p2.getName(), 10);
         }
-        Abel.endJourney(p2.getName(), 10);
-        Ruben.endJourney(p2.getName(), 5 + rand.nextInt(10));
+
+        for(int i = 0; i < 6; i++){
+            Carla.endJourney(p1.getName(), rand.nextInt(15));
+            Anxo.endJourney(p1.getName(), rand.nextInt(15));
+            Abel.endJourney(p1.getName(), rand.nextInt(15));
+            Jandro.endJourney(p1.getName(), rand.nextInt(15));
+            Ruben.endJourney(p1.getName(), rand.nextInt(15));
+            Mauro.endJourney(p1.getName(), 5);
+            Abel.endJourney(p2.getName(), rand.nextInt(15));
+            Ruben.endJourney(p2.getName(), rand.nextInt(15));
+            Mauro.endJourney(p2.getName(), rand.nextInt(5));
+            Jacobo.endJourney(p2.getName(), 5 + rand.nextInt(5));
+        }
+
+        System.out.println(p1.getName() + "\n");
+        p1.printProyect();
+        System.out.println("--------------\n\n");
+        System.out.println(p2.getName() + "\n");
         p2.printProyect();
 
 
         //Imprimir información de un trabajador sobre un proyecto concreto
+
+        System.out.println("--------------\n\n");
+
+        String abelp1 = Abel.printWorkerInfo(p1.getName());
+        String abelp2 = Abel.printWorkerInfo(p2.getName());
+        System.out.println(abelp1);
+        System.out.println(abelp2);
 
         String infoMauro = ("Worker " + Mauro.getName() + ": " + Mauro.totalHours(p1.getName()) +
                 " hours, " + Mauro.totalSalary(p1.getName()) + " €");
@@ -90,7 +107,7 @@ class ProyectoTest {
 
         //Obtener Cotrabajadores de un equipo
         System.out.println("--------------");
-        System.out.println("\nCOTRABAJADORES DE " + eq1.getName());
+        System.out.println("\nCOTRABAJADORES DE " + eq1.getName() + " en " + p1.getName());
         List<ComponenteProyecto> coworkers1 = p1.obtainCoworkers(eq1);
         for(ComponenteProyecto comp : coworkers1){
             comp.printComponents(p1.getName());
