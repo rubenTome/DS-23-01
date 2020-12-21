@@ -1,12 +1,10 @@
 package e2;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class Trabajador extends ComponenteProyecto{
     private final int hourly_salary;
     private HashMap<String, Integer> projectHours = new HashMap<>();
-    Random rand= new Random();
 
     public Trabajador(String name, int hourly_salary) {
         super(name);
@@ -26,9 +24,18 @@ public class Trabajador extends ComponenteProyecto{
     }
 
     @Override
+    public void endJourney(String projectName, int hoursInverted){
+        int oldHours = projectHours.get(projectName);
+        if(projectHours.containsKey(projectName)){
+            projectHours.replace(projectName, oldHours, oldHours + hoursInverted);
+        }
+        else System.out.println("This worker does not belong to this project\n");
+    }
+
+    @Override
     public void addProjectEntry(String projectName){
         if(!projectHours.containsKey(projectName)){
-            projectHours.put(projectName, 15 + rand.nextInt(60));
+            projectHours.put(projectName, 0);
         }
     }
 

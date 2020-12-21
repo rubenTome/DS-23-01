@@ -23,6 +23,13 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
+    public void endJourney(String projectName, int hoursInverted){
+        for(ComponenteProyecto comp : listcomp){
+            comp.endJourney(projectName, hoursInverted);
+        }
+    }
+
+    @Override
     public void addProjectEntry(String projectName){
         for(ComponenteProyecto comp : listcomp){
             comp.addProjectEntry(projectName);

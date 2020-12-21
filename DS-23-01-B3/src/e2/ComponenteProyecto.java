@@ -1,6 +1,5 @@
 package e2;
 
-import java.util.List;
 
 public abstract class ComponenteProyecto {
     private String name;
@@ -23,4 +22,6 @@ public abstract class ComponenteProyecto {
     public abstract void printComponents(String projectName);
 
     public abstract void addProjectEntry(String projectName);
+
+    public abstract void endJourney(String projectName, int hoursInverted);
 }

@@ -1,6 +1,7 @@
 package e2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Proyecto {
@@ -13,6 +14,10 @@ public class Proyecto {
 
     public String getName(){
         return name;
+    }
+
+    public List<ComponenteProyecto> getTeams(){
+        return Collections.unmodifiableList(Teams);
     }
 
     public void addTeam(ComponenteProyecto team){

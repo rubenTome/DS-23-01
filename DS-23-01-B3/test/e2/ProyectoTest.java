@@ -3,10 +3,13 @@ package e2;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProyectoTest {
+
+    Random rand = new Random();
 
     Proyecto p1 = new Proyecto("Projecto 1");
     Proyecto p2 = new Proyecto("Projecto 2");
@@ -41,6 +44,7 @@ class ProyectoTest {
 
         p1.addTeam(eq1);
         p1.addTeam(eq2);
+        p2.addTeam(eq2);
         p2.addTeam(eq3);
 
         //Imprimir componentes de un proyecto
@@ -51,6 +55,26 @@ class ProyectoTest {
         System.out.println("--------------");
 
         System.out.println("PROYECTO 2\n");
+        p2.printProyect();
+
+
+        // Paso de una jornada
+        System.out.println("--------------\n\n");
+        for(ComponenteProyecto comp : p1.getTeams()){
+            comp.endJourney(p1.getName(), 10);
+        }
+        Carla.endJourney(p1.getName(), 2 + rand.nextInt(30));
+        Anxo.endJourney(p1.getName(), 2 + rand.nextInt(30));
+        Abel.endJourney(p1.getName(), 2 + rand.nextInt(50));
+        Ruben.endJourney(p1.getName(), 2 + rand.nextInt(15));
+        p1.printProyect();
+
+        System.out.println("--------------\n\n");
+        for(ComponenteProyecto comp : p2.getTeams()){
+            comp.endJourney(p2.getName(), 10);
+        }
+        Abel.endJourney(p2.getName(), 10);
+        Ruben.endJourney(p2.getName(), 5 + rand.nextInt(10));
         p2.printProyect();
 
 
