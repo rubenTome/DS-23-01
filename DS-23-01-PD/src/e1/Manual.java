@@ -8,6 +8,8 @@ public class Manual implements ModoFun {
     public void manual(Termostato termostato) {
         termostato.setTime(0);
         termostato.setEncendido(true);
+        Timer.getInstancia().setPrimeraVez(true);
+        Program.getInstancia().setPrimeraVez(true);
         termostato.setLog("Modo manual - Calefacción encendida\n");
     }
 
