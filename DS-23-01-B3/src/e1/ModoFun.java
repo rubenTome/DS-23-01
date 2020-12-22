@@ -17,7 +17,7 @@ public interface ModoFun {
         throw new UnsupportedOperationException();
     }
 
-    default void screenInfo(Termostato termostato) {
+    default String screenInfo(Termostato termostato) {
         throw new UnsupportedOperationException();
     }
 }

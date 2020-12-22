@@ -10,28 +10,30 @@ public class Program implements ModoFun {
     }
 
     public void program(Termostato termostato, float temperature) {
+        termostato.setTime(0);
         if (primeraVez) {
-            consigna = temperature;
             primeraVez = false;
+            consigna = temperature;
             termostato.setEncendido(true);
             termostato.setLog("Se activa el modo program a " + consigna + " grados\n");
         } else if (termostato.getCurrentTemperature() < temperature) {
-            termostato.setEncendido(true);
             termostato.setLog(termostato.getCurrentTemperature() + " Modo program (a " + temperature + " grados)"
                     + " - Calefacción encendida\n");
         } else {
-            termostato.setEncendido(false);
             primeraVez = true;
+            termostato.setEncendido(false);
             termostato.setLog(termostato.getCurrentTemperature() + " Modo program (a " + temperature + " grados)"
                     + " - Calefacción apagada\n");
             termostato.apagar();
         }
     }
 
-    public void screenInfo(Termostato termostato) {
+    public void setPrimeraVez(boolean primeraVez) {this.primeraVez = primeraVez;}
+
+    public String screenInfo(Termostato termostato) {
         if (termostato.getEncendido())
-            System.out.println(termostato.getCurrentTemperature() + " ON P " + consigna + "\n");
+            return (termostato.getCurrentTemperature() + " ON P " + consigna + "\n");
         else
-            System.out.println(termostato.getCurrentTemperature() + " OFF P " + consigna + "\n");
+            return (termostato.getCurrentTemperature() + " OFF P " + consigna + "\n");
     }
 }

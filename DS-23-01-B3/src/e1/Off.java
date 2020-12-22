@@ -7,11 +7,13 @@ public class Off implements ModoFun {
     }
     public void apagar(Termostato termostato) {
         termostato.setEncendido(false);
+        Timer.getInstancia().setPrimeraVez(true);
+        Program.getInstancia().setPrimeraVez(true);
         termostato.setTime(0);
         termostato.setLog(termostato.getCurrentTemperature() + " Modo Off - calefacción apagada\n");
     }
 
-    public void screenInfo(Termostato termostato) {
-        System.out.println(termostato.getCurrentTemperature() + " OFF O\n");
+    public String screenInfo(Termostato termostato) {
+        return (termostato.getCurrentTemperature() + " OFF O\n");
     }
 }

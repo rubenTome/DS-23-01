@@ -2,21 +2,20 @@ package e1;
 
 public class Termostato {
     private boolean encendido;
-    private StringBuilder log = new StringBuilder();
+    private final StringBuilder log = new StringBuilder();
     private float currentTemperature;
-    private int time;//esta en minutos
+    private int time;
     private ModoFun modo = Off.getInstancia();
 
     public void newTemperature(float currentTemperature) {
-
         this.currentTemperature = currentTemperature;
         time -= 5;
         if (time < 0)
             time = 0;
     }
 
-    public void screenInfo() {
-        modo.screenInfo(this);
+    public String screenInfo() {
+       return modo.screenInfo(this);
     }
 
     public void manual() {
@@ -49,10 +48,6 @@ public class Termostato {
 
     private void setModo(ModoFun modo) {
         this.modo = modo;
-    }
-
-    public ModoFun getModo() {
-        return modo;
     }
 
     public void setTime(int time) {
