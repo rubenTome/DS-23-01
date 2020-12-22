@@ -14,6 +14,8 @@ public class Program implements modoFun{
                 consigna = temperature;
                 primeraVez = false;
                 termostato.setConflicto(2);
+                termostato.setEncendido(true);
+                termostato.setLog("Se activa el modo program a " + consigna + " grados\n");
             }
             else if (termostato.getCurrentTemperature() < temperature) {
                 termostato.setEncendido(true);
@@ -22,6 +24,7 @@ public class Program implements modoFun{
             }
             else {
                 termostato.setEncendido(false);
+                termostato.setConflicto(0);
                 primeraVez = true;
                 termostato.setLog(termostato.getCurrentTemperature() + " Modo program (a " + temperature + " grados)"
                         + " - Calefacción apagada\n");

@@ -25,13 +25,14 @@ public class Timer implements modoFun {
                     termostato.setEncendido(false);
                     primeraVez = true;
                     termostato.setTime(0);
+                    termostato.setConflicto(0);
                     termostato.setLog("Se desactiva el modo timer\n");
                     termostato.setModo(Off.getInstancia());
                 }
             }
         } else {
-            termostato.setLog("No se puede cambiar a timer\n");
-            termostato.setModo(Timer.getInstancia());
+            System.out.println("No se puede cambiar a timer\n");
+            termostato.setModo(Program.getInstancia());
         }
     }
 

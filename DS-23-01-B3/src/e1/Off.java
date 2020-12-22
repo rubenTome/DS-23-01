@@ -8,7 +8,7 @@ public class Off implements modoFun{
     public void funcionar(Termostato termostato) {
         termostato.setEncendido(false);
         termostato.setTime(0);
-        termostato.setConflicto(0);
+        //termostato.setConflicto(0);
         termostato.setLog(termostato.getCurrentTemperature() + " Modo Off - calefacción apagada\n");
     }
 

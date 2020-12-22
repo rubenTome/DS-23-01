@@ -7,7 +7,7 @@ public class Manual implements modoFun{
     }
     public void funcionar(Termostato termostato) {
         termostato.setEncendido(true);
-        termostato.setConflicto(0);
+        //termostato.setConflicto(0);
         termostato.setLog("Modo manual - Calefacción encendida\n");
     }
 

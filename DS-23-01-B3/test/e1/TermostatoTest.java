@@ -48,12 +48,12 @@ class TermostatoTest {
         termostato.getModo().funcionar(termostato, (float) 20);
         termostato.screenInfo();
 
+        termostato.setModo(Timer.getInstancia());//no se puede,
+        termostato.getModo().funcionar(termostato, 10);
+
         termostato.newTemperature(21);
         termostato.getModo().funcionar(termostato, (float) 20);
         termostato.screenInfo();
-
-        termostato.setModo(Timer.getInstancia());//no se puede
-        termostato.getModo().funcionar(termostato, 10);
 
         System.out.println(termostato.getLog());
                 //fin sucesos en termostato
