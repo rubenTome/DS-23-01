@@ -2,10 +2,10 @@ package e1;
 
 public class Termostato {
     private boolean encendido = false;
-    private StringBuilder log =  new StringBuilder();
+    private StringBuilder log = new StringBuilder();
     private float currentTemperature;
     private int time;//esta en minutos
-    private modoFun modo;
+    private modoFun modo = Off.getInstancia();
     private int conflicto = 0;//para saber cuando se cambia de timer a program o viceversa
 
     public void newTemperature(float currentTemperature) {
@@ -27,27 +27,29 @@ public class Termostato {
         return modo;
     }
 
-    public int getTime() {
-        return time;
+    public void setTime(int time) {
+        this.time = time;
     }
 
-    public void setTime(int time) {this.time = time;}
-
-    public float getCurrentTemperature() {
-        return currentTemperature;
+    public int getTime() {
+        return time;
     }
 
     public void setEncendido(boolean encendido) {
         this.encendido = encendido;
     }
 
-    public boolean getEncendido() {return encendido;}
+    public boolean getEncendido() {
+        return encendido;
+    }
 
     public void setLog(String s) {
         log.append(s);
     }
 
-    public StringBuilder getLog() {return log;}
+    public StringBuilder getLog() {
+        return log;
+    }
 
     public void setConflicto(int conflicto) {
         this.conflicto = conflicto;
@@ -56,4 +58,10 @@ public class Termostato {
     public int getConflicto() {
         return this.conflicto;
     }
+
+    public float getCurrentTemperature() {
+        return currentTemperature;
+    }
+
+
 }

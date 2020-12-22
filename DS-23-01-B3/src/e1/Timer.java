@@ -17,18 +17,11 @@ public class Timer implements modoFun {
                 primeraVez = false;
                 termostato.setTime(time);
                 termostato.setLog("Se activa el modo timer " + time + " minutos\n");
-                termostato.setTime(termostato.getTime() - 5);
-                if (termostato.getTime() < 0)//duda
-                    termostato.setTime(0);
             } else {
                 if (termostato.getTime() > 0) {
                     termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + termostato.getTime()
                             + " minutos) - calefacción encendida\n");
-                    termostato.setTime(termostato.getTime() - 5);
-                    if (termostato.getTime() < 0)//duda
-                        termostato.setTime(0);
-                }
-                else {
+                } else {
                     termostato.setEncendido(false);
                     primeraVez = true;
                     termostato.setTime(0);
@@ -38,18 +31,11 @@ public class Timer implements modoFun {
             }
         } else {
             termostato.setLog("No se puede cambiar a timer\n");
-            termostato.setModo(Program.getInstancia());
+            termostato.setModo(Timer.getInstancia());
         }
     }
 
     public void screenInfo(Termostato termostato) {
-        if (termostato.getEncendido()) {
-            if (termostato.getTime() > 0)
-                System.out.println(termostato.getCurrentTemperature() + " ON T " + termostato.getTime() + "\n");
-            else
-                System.out.println(termostato.getCurrentTemperature() + " OFF T " + termostato.getTime() + "\n");
-        }
-        else
-            System.out.println(termostato.getCurrentTemperature() + " OFF T " + termostato.getTime() + "\n");
+        System.out.println(termostato.getCurrentTemperature() + " ON T " + termostato.getTime() + "\n");
     }
 }
