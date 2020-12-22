@@ -6,11 +6,12 @@ public class Manual implements ModoFun {
         return instancia;
     }
     public void manual(Termostato termostato) {
+        termostato.setTime(0);
         termostato.setEncendido(true);
         termostato.setLog("Modo manual - Calefacción encendida\n");
     }
 
-    public void screenInfo(Termostato termostato) {
-        System.out.println(termostato.getCurrentTemperature() + " ON M\n");
+    public String screenInfo(Termostato termostato) {
+        return (termostato.getCurrentTemperature() + " ON M\n");
     }
 }

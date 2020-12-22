@@ -9,6 +9,7 @@ public interface ModoFun {
     default void apagar(Termostato termostato) {
         throw new UnsupportedOperationException();
     }
+
     default void timer(Termostato termostato, int time) {
         throw new UnsupportedOperationException();
     }
@@ -17,7 +18,7 @@ public interface ModoFun {
         throw new UnsupportedOperationException();
     }
 
-    default void screenInfo(Termostato termostato) {
+    default String screenInfo(Termostato termostato) {
         throw new UnsupportedOperationException();
     }
 }

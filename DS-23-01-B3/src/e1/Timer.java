@@ -11,8 +11,8 @@ public class Timer implements ModoFun {
 
     public void timer(Termostato termostato, int time) {
         if (primeraVez) {
-            termostato.setEncendido(true);
             primeraVez = false;
+            termostato.setEncendido(true);
             termostato.setTime(time);
             termostato.setLog("Se activa el modo timer " + time + " minutos\n");
         } else {
@@ -20,16 +20,15 @@ public class Timer implements ModoFun {
                 termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + termostato.getTime()
                         + " minutos) - calefacción encendida\n");
             } else {
-                termostato.setEncendido(false);
-                primeraVez = true;
-                termostato.setTime(0);
                 termostato.setLog("Se desactiva el modo timer\n");
                 termostato.apagar();
             }
         }
     }
 
-    public void screenInfo(Termostato termostato) {
-        System.out.println(termostato.getCurrentTemperature() + " ON T " + termostato.getTime() + "\n");
+    public void setPrimeraVez(boolean primeraVez) {this.primeraVez = primeraVez;}
+
+    public String screenInfo(Termostato termostato) {
+        return (termostato.getCurrentTemperature() + " ON T " + termostato.getTime() + "\n");
     }
 }
