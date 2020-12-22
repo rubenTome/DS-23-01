@@ -24,7 +24,7 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
-    public void endJourney(String projectName, int hoursInverted){
+    public void endJourney(String projectName, float hoursInverted){
         for(ComponenteProyecto comp : listcomp){
             comp.endJourney(projectName, hoursInverted);
         }
@@ -38,7 +38,7 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
-    public int totalSalary(String projectName){
+    public float totalSalary(String projectName){
         int salario = 0;
         for(ComponenteProyecto comp : listcomp){
             salario += comp.totalSalary(projectName);
@@ -47,7 +47,7 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
-    public int totalHours(String projectName){
+    public float totalHours(String projectName){
         int horas = 0;
         for(ComponenteProyecto comp : listcomp){
             horas += comp.totalHours(projectName);
@@ -73,6 +73,14 @@ public class Equipo extends ComponenteProyecto{
             else sb.append(comp.printComponents(projectName, indent));
         }
         return sb.toString();
+    }
+
+    @Override
+    public List<String> coworkers(List<String> coworkers, Proyecto proyecto){
+        for(ComponenteProyecto comp : listcomp){
+            comp.coworkers(coworkers, proyecto);
+        }
+        return coworkers;
     }
 
 }

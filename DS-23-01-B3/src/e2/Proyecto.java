@@ -29,21 +29,17 @@ public class Proyecto {
 
     public String printProyect() {
         StringBuilder sb = new StringBuilder();
-        for(ComponenteProyecto comp : Teams){
-            sb.append(comp.printComponents(this.name, 1));
+        for(ComponenteProyecto team : Teams){
+            sb.append(team.printComponents(this.name, 1));
         }
         return sb.toString();
     }
 
-    public List<ComponenteProyecto> obtainCoworkers(ComponenteProyecto team){
-        List<ComponenteProyecto> Coworkers = new ArrayList<>();
-        if(Teams.contains(team)){
-            for(ComponenteProyecto comp : Teams){
-                if(!comp.equals(team)){
-                    Coworkers.add(comp);
-                }
-            }
+    public List<String> coworkers(ComponenteProyecto origen, List<String> listadestino){
+        for(ComponenteProyecto team : this.getTeams()){
+            team.coworkers(listadestino, this);
         }
-        return Coworkers;
+        return listadestino;
     }
+
 }

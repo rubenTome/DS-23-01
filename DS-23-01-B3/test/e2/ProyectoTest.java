@@ -2,8 +2,8 @@ package e2;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -103,7 +103,7 @@ class ProyectoTest {
         System.out.println(abelp2);
 
         String infoMauro = ("Worker " + Mauro.getName() + ": " + Mauro.totalHours(p1.getName()) +
-                " hours, " + Mauro.totalSalary(p1.getName()) + " €");
+                " hours, " + Mauro.totalSalary(p1.getName()) + " €\n");
         String infoMauro2 = Mauro.printWorkerInfo(p1.getName());
         String infoJacobo = Jacobo.printWorkerInfo(p1.getName());
 
@@ -111,11 +111,11 @@ class ProyectoTest {
         assertEquals(infoJacobo, "This worker does not belong to this project\n");
 
         //Obtener Cotrabajadores de un equipo
+        List<String> coworkersJacobo = new ArrayList<>();
         System.out.println("--------------");
-        System.out.println("\nCOTRABAJADORES DE " + eq1.getName() + " en " + p1.getName());
-        List<ComponenteProyecto> coworkers1 = p1.obtainCoworkers(eq1);
-        for(ComponenteProyecto comp : coworkers1){
-            System.out.println(comp.printComponents(p1.getName(), 1));
+        System.out.println("\nCOTRABAJADORES DE " + Jacobo.getName() + " en " + p2.getName());
+        for(String str : p2.coworkers(Jacobo, coworkersJacobo)){
+            System.out.println(str);
         }
     }
 }

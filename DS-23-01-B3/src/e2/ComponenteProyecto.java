@@ -1,6 +1,8 @@
 package e2;
 
 
+import java.util.List;
+
 public abstract class ComponenteProyecto {
     private String name;
     public ComponenteProyecto(String name){
@@ -15,13 +17,15 @@ public abstract class ComponenteProyecto {
         this.name = name;
     }
 
-    public abstract int totalHours(String projectName);
+    public abstract float totalHours(String projectName);
 
-    public abstract int totalSalary(String projectName);
+    public abstract float totalSalary(String projectName);
 
     public abstract String printComponents(String projectName, int indent);
 
     public abstract void addProjectEntry(String projectName);
 
-    public abstract void endJourney(String projectName, int hoursInverted);
+    public abstract void endJourney(String projectName, float hoursInverted);
+
+    public abstract List<String> coworkers(List<String> coworkers, Proyecto proyecto);
 }
