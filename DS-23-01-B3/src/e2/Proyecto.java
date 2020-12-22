@@ -27,10 +27,12 @@ public class Proyecto {
         }
     }
 
-    public void printProyect() {
+    public String printProyect() {
+        StringBuilder sb = new StringBuilder();
         for(ComponenteProyecto comp : Teams){
-            comp.printComponents(this.name);
+            sb.append(comp.printComponents(this.name, 1));
         }
+        return sb.toString();
     }
 
     public List<ComponenteProyecto> obtainCoworkers(ComponenteProyecto team){

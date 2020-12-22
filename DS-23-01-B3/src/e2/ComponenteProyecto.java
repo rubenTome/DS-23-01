@@ -19,7 +19,7 @@ public abstract class ComponenteProyecto {
 
     public abstract int totalSalary(String projectName);
 
-    public abstract void printComponents(String projectName);
+    public abstract String printComponents(String projectName, int indent);
 
     public abstract void addProjectEntry(String projectName);
 

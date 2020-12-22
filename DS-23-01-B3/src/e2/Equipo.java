@@ -1,6 +1,7 @@
 package e2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Equipo extends ComponenteProyecto{
@@ -18,8 +19,8 @@ public class Equipo extends ComponenteProyecto{
         listcomp.remove(comp);
     }
 
-    public ComponenteProyecto getComponente(int index){
-        return listcomp.get(index);
+    public List<ComponenteProyecto> getListaTrabajadores(){
+        return Collections.unmodifiableList(listcomp);
     }
 
     @Override
@@ -55,15 +56,23 @@ public class Equipo extends ComponenteProyecto{
     }
 
     @Override
-    public void printComponents(String projectName){
+    public String printComponents(String projectName, int indent){
 
-        System.out.println("Team " + getName() + ": " + totalHours(projectName) + " hours, " +
-                totalSalary(projectName) + " €");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Team ").append(getName()).append(": ").append(totalHours(projectName)).append(" hours, ")
+                .append(totalSalary(projectName)).append(" €\n");
 
         for(ComponenteProyecto comp : listcomp){
-            System.out.print("\t");
-            comp.printComponents(projectName);
+            for(int i = 0; i < indent; i++){
+                sb.append("\t");
+            }
+            if(comp.getClass().equals(Equipo.class)){
+                sb.append(comp.printComponents(projectName, indent + 1));
+            }
+            else sb.append(comp.printComponents(projectName, indent));
         }
+        return sb.toString();
     }
 
 }
