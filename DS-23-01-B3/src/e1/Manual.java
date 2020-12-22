@@ -1,13 +1,12 @@
 package e1;
 
-public class Manual implements modoFun{
+public class Manual implements ModoFun {
     private static final Manual instancia = new Manual();
     public static Manual getInstancia() {
         return instancia;
     }
-    public void funcionar(Termostato termostato) {
+    public void manual(Termostato termostato) {
         termostato.setEncendido(true);
-        termostato.setConflicto(0);
         termostato.setLog("Modo manual - Calefacción encendida\n");
     }
 

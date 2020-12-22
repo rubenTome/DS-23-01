@@ -1,14 +1,14 @@
 package e1;
 
 public class Termostato {
-    private boolean encendido = false;
-    private StringBuilder log =  new StringBuilder();
+    private boolean encendido;
+    private StringBuilder log = new StringBuilder();
     private float currentTemperature;
     private int time;//esta en minutos
-    private modoFun modo;
-    private int conflicto = 0;//para saber cuando se cambia de timer a program o viceversa
+    private ModoFun modo = Off.getInstancia();
 
     public void newTemperature(float currentTemperature) {
+
         this.currentTemperature = currentTemperature;
         time -= 5;
         if (time < 0)
@@ -19,41 +19,69 @@ public class Termostato {
         modo.screenInfo(this);
     }
 
-    public void setModo(modoFun modo) {
+    public void manual() {
+        this.setModo(Manual.getInstancia());
+        modo.manual(this);
+    }
+
+    public void apagar() {
+        this.setModo(Off.getInstancia());
+        modo.apagar(this);
+    }
+
+    public void timer(int time) {
+        if (!(this.modo instanceof Program)) {
+            this.setModo(Timer.getInstancia());
+            modo.timer(this, time);
+        }
+        else
+            setLog("No se puede cambiar a timer\n");
+    }
+
+    public void program(float temperature) {
+        if (!(this.modo instanceof Timer)) {
+            this.setModo(Program.getInstancia());
+            modo.program(this, temperature);
+        }
+        else
+            setLog("No se puede cambiar a program\n");
+    }
+
+    private void setModo(ModoFun modo) {
         this.modo = modo;
     }
 
-    public modoFun getModo() {
+    public ModoFun getModo() {
         return modo;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public int getTime() {
         return time;
     }
 
-    public void setTime(int time) {this.time = time;}
-
-    public float getCurrentTemperature() {
-        return currentTemperature;
-    }
-
     public void setEncendido(boolean encendido) {
         this.encendido = encendido;
     }
 
-    public boolean getEncendido() {return encendido;}
+    public boolean getEncendido() {
+        return encendido;
+    }
 
     public void setLog(String s) {
         log.append(s);
     }
 
-    public StringBuilder getLog() {return log;}
-
-    public void setConflicto(int conflicto) {
-        this.conflicto = conflicto;
+    public StringBuilder getLog() {
+        return log;
     }
 
-    public int getConflicto() {
-        return this.conflicto;
+    public float getCurrentTemperature() {
+        return currentTemperature;
     }
+
+
 }
