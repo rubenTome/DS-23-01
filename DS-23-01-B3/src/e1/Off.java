@@ -2,9 +2,11 @@ package e1;
 
 public class Off implements ModoFun {
     private static final Off instancia = new Off();
+
     public static Off getInstancia() {
         return instancia;
     }
+
     public void apagar(Termostato termostato) {
         termostato.setEncendido(false);
         Timer.getInstancia().setPrimeraVez(true);

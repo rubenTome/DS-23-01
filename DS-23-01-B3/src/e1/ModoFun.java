@@ -9,6 +9,7 @@ public interface ModoFun {
     default void apagar(Termostato termostato) {
         throw new UnsupportedOperationException();
     }
+
     default void timer(Termostato termostato, int time) {
         throw new UnsupportedOperationException();
     }
