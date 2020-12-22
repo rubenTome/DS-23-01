@@ -3,6 +3,7 @@ package e2;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ class ProyectoTest {
     Proyecto p2 = new Proyecto("HACKING DESIGN");
 
     Equipo eq1 = new Equipo("BITCOINNERS");
-    Equipo eq2 = new Equipo("RECHEA");
+    Equipo eq2 = new Equipo("ENGINE DEVELOPERS");
     Equipo eq3 = new Equipo("JAVA MASTERS");
     Equipo seq1 = new Equipo("JAVA PROS");
 
@@ -50,12 +51,12 @@ class ProyectoTest {
         //Imprimir componentes de un proyecto
 
         System.out.println(p1.getName() + "\n");
-        p1.printProyect();
+        System.out.println(p1.printProyect());
 
         System.out.println("--------------");
 
         System.out.println(p2.getName() + "\n");
-        p2.printProyect();
+        System.out.println(p2.printProyect());
 
 
         // Paso de varias jornadas
@@ -82,10 +83,12 @@ class ProyectoTest {
         }
 
         System.out.println(p1.getName() + "\n");
-        p1.printProyect();
+        System.out.println(p1.printProyect());
         System.out.println("--------------\n\n");
         System.out.println(p2.getName() + "\n");
-        p2.printProyect();
+        System.out.println(p2.printProyect());
+
+        assertThrows(NullPointerException.class, () -> Jacobo.endJourney(p1.getName(), 5));
 
 
         //Imprimir información de un trabajador sobre un proyecto concreto
@@ -94,7 +97,9 @@ class ProyectoTest {
 
         String abelp1 = Abel.printWorkerInfo(p1.getName());
         String abelp2 = Abel.printWorkerInfo(p2.getName());
-        System.out.println(abelp1);
+        System.out.println(p1.getName() + "\n");
+        System.out.println(abelp1 + "\n");
+        System.out.println(p2.getName() + "\n");
         System.out.println(abelp2);
 
         String infoMauro = ("Worker " + Mauro.getName() + ": " + Mauro.totalHours(p1.getName()) +
@@ -110,7 +115,7 @@ class ProyectoTest {
         System.out.println("\nCOTRABAJADORES DE " + eq1.getName() + " en " + p1.getName());
         List<ComponenteProyecto> coworkers1 = p1.obtainCoworkers(eq1);
         for(ComponenteProyecto comp : coworkers1){
-            comp.printComponents(p1.getName());
+            System.out.println(comp.printComponents(p1.getName(), 1));
         }
     }
 }

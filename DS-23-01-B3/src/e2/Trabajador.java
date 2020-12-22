@@ -25,11 +25,11 @@ public class Trabajador extends ComponenteProyecto{
 
     @Override
     public void endJourney(String projectName, int hoursInverted){
-        int oldHours = projectHours.get(projectName);
+        int oldHours = getHours(projectName);
         if(projectHours.containsKey(projectName)){
             projectHours.replace(projectName, oldHours, oldHours + hoursInverted);
         }
-        else System.out.println("This worker does not belong to this project\n");
+        else throw new NullPointerException("This worker does not belong to this project\n");
     }
 
     @Override
@@ -50,9 +50,9 @@ public class Trabajador extends ComponenteProyecto{
     }
 
     @Override
-    public void printComponents(String projectName){
-        System.out.println("Worker " + getName() + ": " + totalHours(projectName) + " hours, " +
-                totalSalary(projectName) + " €");
+    public String printComponents(String projectName, int indent){
+        return ("Worker " + getName() + ": " + totalHours(projectName) + " hours, " +
+                totalSalary(projectName) + " €\n");
     }
 
 
