@@ -1,14 +1,13 @@
 package e1;
 
-public class Off implements modoFun{
+public class Off implements ModoFun {
     private static final Off instancia = new Off();
     public static Off getInstancia() {
         return instancia;
     }
-    public void funcionar(Termostato termostato) {
+    public void apagar(Termostato termostato) {
         termostato.setEncendido(false);
         termostato.setTime(0);
-        //termostato.setConflicto(0);
         termostato.setLog(termostato.getCurrentTemperature() + " Modo Off - calefacción apagada\n");
     }
 

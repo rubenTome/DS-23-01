@@ -1,6 +1,6 @@
 package e1;
 
-public class Timer implements modoFun {
+public class Timer implements ModoFun {
     private boolean primeraVez = true;
 
     private static final Timer instancia = new Timer();
@@ -9,30 +9,23 @@ public class Timer implements modoFun {
         return instancia;
     }
 
-    public void funcionar(Termostato termostato, int time) {
-        if (termostato.getConflicto() != 2) {
-            if (primeraVez) {
-                termostato.setConflicto(1);
-                termostato.setEncendido(true);
-                primeraVez = false;
-                termostato.setTime(time);
-                termostato.setLog("Se activa el modo timer " + time + " minutos\n");
-            } else {
-                if (termostato.getTime() > 0) {
-                    termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + termostato.getTime()
-                            + " minutos) - calefacción encendida\n");
-                } else {
-                    termostato.setEncendido(false);
-                    primeraVez = true;
-                    termostato.setTime(0);
-                    termostato.setConflicto(0);
-                    termostato.setLog("Se desactiva el modo timer\n");
-                    termostato.setModo(Off.getInstancia());
-                }
-            }
+    public void timer(Termostato termostato, int time) {
+        if (primeraVez) {
+            termostato.setEncendido(true);
+            primeraVez = false;
+            termostato.setTime(time);
+            termostato.setLog("Se activa el modo timer " + time + " minutos\n");
         } else {
-            System.out.println("No se puede cambiar a timer\n");
-            termostato.setModo(Program.getInstancia());
+            if (termostato.getTime() > 0) {
+                termostato.setLog(termostato.getCurrentTemperature() + " Modo Timer (faltan " + termostato.getTime()
+                        + " minutos) - calefacción encendida\n");
+            } else {
+                termostato.setEncendido(false);
+                primeraVez = true;
+                termostato.setTime(0);
+                termostato.setLog("Se desactiva el modo timer\n");
+                termostato.apagar();
+            }
         }
     }
 
